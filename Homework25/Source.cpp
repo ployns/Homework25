@@ -1,54 +1,48 @@
-#include <stdio.h>
+#include<stdio.h>
+#include<conio.h>
 
-void inputArray(int* arr, int size);
-int search(int* arr, int size, int toSearch);
+void Min(double* num1, double* num2)
+{
+    double answer;
+    answer = *num1 - *num2;
+    printf("\n%.2lf", answer);
+}
+
+void Sum(double* num1, double* num2)
+{
+    double answer;
+    answer = (*num1) + (*num2);
+    printf("\n%.2lf", answer);
+}
 
 int main()
 {
-    int array[10];
-    int size, toSearch, searchIndex;
-
-    printf("Enter size of array: ");
-    scanf_s("%d", &size);
-
-    printf("Enter numbers in array: ");
-    inputArray(array, size);
-
-    printf("Enter number to search: ");
-    scanf_s("%d", &toSearch);
-    searchIndex = search(array, size, toSearch);
-
-    if (searchIndex == -1) {
-        printf("%d does not exists in array.", toSearch);
+    double num[2];
+    int choose;
+    for (int i = 0; i < 2; i++)
+    {
+        printf("Enter number : ");
+        scanf_s("%lf", &num[i]);
     }
-    else {
-        printf("%d is first found at %d position.", toSearch, searchIndex + 1);
+    printf("\n1.Sum\n2.Minus\n");
+
+    printf("Select : ");
+    scanf_s("%d", &choose);
+
+    if (&num[0] != NULL || &num[1] != NULL)
+    {
+        if (choose == 1)
+            Sum(&num[0], &num[1]);
+        else if (choose == 2)
+            Min(&num[0], &num[1]);
+        else {
+            printf("Error");
+        }
+    }
+    else
+    {
+        printf("Error");
     }
 
     return 0;
-}
-
-void inputArray(int* arr, int size)
-{
-    int* arrEnd = (arr + size - 1);
-    while (arr <= arrEnd)
-    {
-        scanf_s("%d", arr++);
-    }
-}
-
-int search(int* arr, int size, int toSearch)
-{
-    int index = 0;
-    int* arrEnd = (arr + size - 1);
-    while (arr <= arrEnd && *arr != toSearch) {
-        arr++;
-        index++;
-    }
-
-    if (arr <= arrEnd) {
-        return index;
-    }
-
-    return -1;
 }
